@@ -50,4 +50,16 @@ for key in my_numbers:
                 check_numbers.append(my_numbers[n])
         n += 1
 
-if len(check_numbers) = 6
+if len(check_numbers) == 6 :
+        if check_numbers[5] == bonus_number :
+            print("2등")
+        else :
+            print("1등")
+elif len(check_numbers) == 5 :
+        print("3등")
+elif len(check_numbers) == 4 :
+        print("4등")
+elif len(check_numbers) == 3 :
+        print("5등")
+else :
+        print("꽝")
