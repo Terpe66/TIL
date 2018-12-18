@@ -49,4 +49,5 @@ for key in my_numbers:
         elif my_numbers[n] == bonus_number:
                 check_numbers.append(my_numbers[n])
         n += 1
-print(check_numbers)
+
+if len(check_numbers) = 6
