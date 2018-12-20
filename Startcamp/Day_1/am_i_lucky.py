@@ -16,14 +16,14 @@ real_numbers.sort()
 bonus_number = data['bnusNo']
 print(real_numbers)
 
-# numbers = list(range(1, 46))
+numbers = list(range(1, 46))
 
-# my_numbers = random.sample(numbers, 6)
-# my_numbers.sort()
+my_numbers = random.sample(numbers, 6)
+my_numbers.sort()
 
-# print(my_numbers)
+print(my_numbers)
 
-my_numbers = [2, 25, 28, 30, 33, 6]
+# my_numbers = [2, 25, 28, 30, 33, 6]
 
 # my_numbers, real_numbers, bonus_number
 # 1등 : my_numbers == real_numbers
@@ -51,6 +51,17 @@ elif count == 3:
     print("5등")
 else:
     print("꽝")
+
+# 선생님 답안
+# count = 0
+# for my_number in my_numbers:
+#     for real_number in real_numbers:
+#         if my_number == real_number:
+#             count += 1
+
+# print(count)
+
+
 
 
 # check_numbers = []
