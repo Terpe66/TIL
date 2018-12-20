@@ -57,18 +57,17 @@ def am_i_lucky2(pick, draw):
 
 def am_i_lucky(draw_no):
 	my_numbers = random.sample(range(1, 46), 6)
-	if type(draw_no) == int:
-		url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + str(draw_no)
-		response = requests.get(url)
-		lotto_data = response.json()
-		numbers = []
-		for key, value in lotto_data.items():
-			if 'drwtNo' in key:
-				numbers.append(value)
-		bonus_number = lotto_data['bnusNo']
-		real_numbers = {"numbers" : numbers, "bonus" : bonus_number}
-	else:
-		return "숫자를 입력해주세요."
+
+	url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + str(draw_no)
+	response = requests.get(url)
+	lotto_data = response.json()
+	numbers = []
+	for key, value in lotto_data.items():
+		if 'drwtNo' in key:
+			numbers.append(value)
+	bonus_number = lotto_data['bnusNo']
+	real_numbers = {"numbers" : numbers, "bonus" : bonus_number}
+
 	count = 0
 	for lucky_number in my_numbers:
 		if lucky_number in real_numbers["numbers"]:
