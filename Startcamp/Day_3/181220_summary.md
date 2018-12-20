@@ -174,3 +174,49 @@ am_i_lucky(list_1, dict_1)
 
 
 
+## 3. flask
+
+### 1) c9에서 진행함
+
+```python
+from flask import Flask, jsonify
+from random import sample
+
+app = Flask(__name__)
+
+@app.route("/")
+# route는 주소창에 들어오는 값
+def index():
+    return "Happy Hacking"
+    
+@app.route("/hi")
+def hi():
+    return "Hello SSAFY"
+
+@app.route("/pick_lotto")
+def pick_lotto():
+    return jsonify(sample(range(1, 46), 6))
+    
+@app.route("/get_lotto")
+def get_lotto():
+    data = {
+        "numbers" : [1, 2, 3, 4, 5, 6],
+        "bonus" : 7
+    }
+    return jsonify(data)
+
+# @app.route("/send_message")
+# def send_message():
+#     telgram.send('msg')
+#     return telgram
+```
+
+```
+$ python3 -V
+$ sudo pip3 install flask
+# sudo는 관리자 권한 느낌
+$ flask run -h 0.0.0.0 -p 8080
+$ export FLASK_ENV=development
+# 개발자 환경? 저장하면 자동으로 서버가 껐다 켜짐
+```
+
