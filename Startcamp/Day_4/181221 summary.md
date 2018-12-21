@@ -8,6 +8,7 @@
 오른쪽 창에 {} 안에 붙여 넣기 :
 
 "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\bash.exe"
+# 이거 안 됨
 
 (여기서 원하는 다른 사용자 정의 설정을 넣을 수 있습니다)
 
