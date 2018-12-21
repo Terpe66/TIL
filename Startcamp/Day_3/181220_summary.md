@@ -183,6 +183,7 @@ from flask import Flask, jsonify
 from random import sample
 
 app = Flask(__name__)
+# 이걸로 시작
 
 @app.route("/")
 # route는 주소창에 들어오는 값
