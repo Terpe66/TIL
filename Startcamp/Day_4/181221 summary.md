@@ -238,3 +238,8 @@ def lucky(draw_no, a, b, c, d, e, f):
 
 
 
+# 6. 기억할 것
+
+C, python 차이 (ex. for)
+
+class 안에 있는 title 등 빼는 것
