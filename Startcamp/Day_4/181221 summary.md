@@ -2,12 +2,16 @@
 
 ## 1. 검색한 거 필기(vscode 터미널 bash)
 
+1번은 꼭 하지 않아도 됨.
+git 연동? 할 때 필요한 부분인듯
+기본 power shell에서도 git 연동 빼면 같나봄.
 ```
 파일> 환경 설정> 설정 (Ctrl +,)
 
 오른쪽 창에 {} 안에 붙여 넣기 :
 
 "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\bash.exe"
+# 이거 안 됨
 
 (여기서 원하는 다른 사용자 정의 설정을 넣을 수 있습니다)
 
@@ -28,7 +32,7 @@
 
 
 
-## 3. flask
+## 3. flask(내일 다시 확인)
 
 ### 1) run 쉽게 하기
 
@@ -234,3 +238,8 @@ def lucky(draw_no, a, b, c, d, e, f):
 
 
 
+# 6. 기억할 것
+
+C, python 차이 (ex. for)
+
+class 안에 있는 title 등 빼는 것
