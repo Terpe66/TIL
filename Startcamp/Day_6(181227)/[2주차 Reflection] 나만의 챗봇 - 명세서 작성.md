@@ -1,4 +1,4 @@
-서울 3반 이원진 https://github.com/Terpe66/TIL/tree/master/Startcamp/Day_5(181226-27)
+서울 3반 이원진 https://github.com/Terpe66/TIL/tree/master/Startcamp/Day_6(181227)
 
 
 
