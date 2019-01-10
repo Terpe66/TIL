@@ -12,11 +12,7 @@ def hangman_list():
         letter = input("이 단어가 맞나요? : ")
         if letter in answer:
             for i in answer:
-                if letter == i:
-                    blank(insert(answer_list.index(letter), letter)
-                    blank.pop(answer_list.index(letter))
-                    
-                else:
+                if letter != i:
                     while blank.count(i) != 0:
                         blank.insert(blank.index(i), "._")
                         blank.remove(i)
@@ -26,6 +22,10 @@ def hangman_list():
                             if al != "._":
                                 blank.insert(answer_list.index(al), al)
                                 blank.pop(answer_list.index(al)+1)
+                
+                else:
+                    blank.insert(answer_list.index(letter), al)
+                    blank.pop(answer_list.index(letter)+1)
                 
 
             print(f"단어를 맞췄습니다. 현재 상태는 {''.join(blank)}, 남은 목숨은 {count}입니다.")
@@ -41,3 +41,6 @@ def hangman_list():
         
 
 hangman_list()
+
+# blank = ["a","b","c","d"]
+# blank.index("a")
