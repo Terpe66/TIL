@@ -1549,7 +1549,9 @@ class Stadium():
         print(f"{t1.Tname}와/과 {t2.Tname}의 결투가 시작되었다!")
 
     def battle(self):
-        while len(self.t1.mon_set) > 0 and len(self.t2.mon_set) > 0:
+        t1_D = []
+        t2_D = []
+        while len(t1_D) < 6 and len(t2_D) < 6:
             self.t1.status()
             t1_P = int(input("배틀에 참가할 포켓몬을 선택하세요 : "))
             t1_P = self.t1.mon_set[t1_P - 1]
@@ -1975,11 +1977,16 @@ class Stadium():
 
             if t1_P.hp < 1:
                 print(f"{t1_P.name}은/는 더 이상 싸울 수 없다!")
+                t1_D.append(t1_P)
                 # self.t1.mon_set.pop(self.t1.mon_set[t1_S - 1])
             if t2_P.hp < 1:
                 print(f"{t2_P.name}은/는 더 이상 싸울 수 없다!")
+                t2_D.append(t2_P)
                 # self.t2.mon_set.pop(self.t2.mon_set[t1_S - 1])
-
+        if t1_D == 6:
+            print(f"{self.t1.Tname}은/는 싸울 포켓몬이 없다!\n{self.t2.Tname}의 승리!")
+        if t2_D == 6:
+            print(f"{self.t2.Tname}은/는 싸울 포켓몬이 없다!\n{self.t1.Tname}의 승리!")
             
 
 
