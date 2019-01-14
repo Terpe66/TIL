@@ -1565,8 +1565,8 @@ class Stadium():
                 print(f"{self.t1.Tname}의 포켓몬은 {t1_P.name}!\n{self.t2.Tname}의 포켓몬은 {t2_P.name}입니다!")
  
             while t1_P.hp > 0 and t2_P.hp > 0:
-                print(t1_P.name + " : " + "■"*int(t1_P.hp*0.03))
-                print(t2_P.name + " : " + "■"*int(t2_P.hp*0.03))
+                print(t1_P.name + " : " + "■"*int(t1_P.hp*0.3))
+                print(t2_P.name + " : " + "■"*int(t2_P.hp*0.3))
 
                 if (t1_P.speed == t2_P.speed or t1_P.speed > t2_P.speed) and t1_P.hp > 0:
                     print(f"{self.t1.Tname}의 {t1_P.name}은/는 무엇을 할까?\n")
@@ -1576,7 +1576,7 @@ class Stadium():
 
                     if type(t2_P.ptype) == tuple:
                         t1_attack = 0
-                        while t1_attack < 1:
+                        if t1_attack < 1:
                             if (t2_P.ptype[0] not in (t1_P.skill_list[t1_S - 1][3] or t1_P.skill_list[t1_S - 1][4] or t1_P.skill_list[t1_S - 1][5])) and (t2_P.ptype[1] not in (t1_P.skill_list[t1_S - 1][3] or t1_P.skill_list[t1_S - 1][4] or t1_P.skill_list[t1_S - 1][5])):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1590,11 +1590,11 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t1_attack += 1
-                            
+                        if t1_attack < 1:
                             if t1_P.skill_list[t1_S - 1][5] != 0 and (t2_P.ptype[0] in t1_P.skill_list[t1_S - 1][5] or t2_P.ptype[1] in t1_P.skill_list[t1_S - 1][5]):
                                 print("효과가 없는 것 같다.")
                                 t1_attack += 1
-
+                        if t1_attack < 1:
                             if t1_P.skill_list[t1_S - 1][4] != 0 and (t2_P.ptype[0] in t1_P.skill_list[t1_S - 1][4] or t2_P.ptype[1] in t1_P.skill_list[t1_S - 1][4]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1608,7 +1608,7 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t1_attack += 1
-
+                        if t1_attack < 1:
                             if t1_P.skill_list[t1_S - 1][3] != 0 and (t2_P.ptype[0] in t1_P.skill_list[t1_S - 1][3] or t2_P.ptype[1] in t1_P.skill_list[t1_S - 1][3]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1625,7 +1625,7 @@ class Stadium():
 
                     if type(t2_P.ptype) == str:
                         t1_attack = 0
-                        while t1_attack < 1:
+                        if t1_attack < 1:
                             if (t2_P.ptype not in (t1_P.skill_list[t1_S - 1][3] or t1_P.skill_list[t1_S - 1][4] or t1_P.skill_list[t1_S - 1][5])) and (t2_P.ptype not in (t1_P.skill_list[t1_S - 1][3] or t1_P.skill_list[t1_S - 1][4] or t1_P.skill_list[t1_S - 1][5])):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1639,11 +1639,11 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t1_attack += 1
-                            
+                        if t1_attack < 1:    
                             if t1_P.skill_list[t1_S - 1][5] != 0 and (t2_P.ptype in t1_P.skill_list[t1_S - 1][5] or t2_P.ptype in t1_P.skill_list[t1_S - 1][5]):
                                 print("효과가 없는 것 같다.")
                                 t1_attack += 1
-
+                        if t1_attack < 1:
                             if t1_P.skill_list[t1_S - 1][4] != 0 and (t2_P.ptype in t1_P.skill_list[t1_S - 1][4] or t2_P.ptype in t1_P.skill_list[t1_S - 1][4]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1657,7 +1657,7 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t1_attack += 1
-
+                        if t1_attack < 1:
                             if t1_P.skill_list[t1_S - 1][3] != 0 and (t2_P.ptype in t1_P.skill_list[t1_S - 1][3] or t2_P.ptype in t1_P.skill_list[t1_S - 1][3]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1674,7 +1674,7 @@ class Stadium():
                             
                     if type(t1_P.ptype) == tuple and t2_P.hp > 0:
                         t2_attack = 0
-                        while t1_attack < 1:
+                        if t2_attack < 1:
                             if (t1_P.ptype[0] not in (t2_P.skill_list[t2_S - 1][3] or t2_P.skill_list[t2_S - 1][4] or t2_P.skill_list[t2_S - 1][5])) and (t1_P.ptype[1] not in (t2_P.skill_list[t2_S - 1][3] or t2_P.skill_list[t2_S - 1][4] or t2_P.skill_list[t2_S - 1][5])):
                                 if random.choice(range(101)) in range(t2_P.skill_list[t2_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1692,7 +1692,7 @@ class Stadium():
                             if t2_P.skill_list[t2_S - 1][5] != 0 and (t1_P.ptype[0] in t2_P.skill_list[t2_S - 1][5] or t1_P.ptype[1] in t2_P.skill_list[t2_S - 1][5]):
                                 print("효과가 없는 것 같다.")
                                 t2_attack += 1
-
+                        if t2_attack < 1:
                             if t2_P.skill_list[t2_S - 1][4] != 0 and (t1_P.ptype[0] in t2_P.skill_list[t2_S - 1][4] or t1_P.ptype[1] in t2_P.skill_list[t2_S - 1][4]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1706,7 +1706,7 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t2_attack += 1
-
+                        if t2_attack < 1:
                             if t2_P.skill_list[t2_S - 1][3] != 0 and (t1_P.ptype[0] in t2_P.skill_list[t2_S - 1][3] or t1_P.ptype[1] in t2_P.skill_list[t2_S - 1][3]):
                                 if random.choice(range(101)) in range(t2_P.skill_list[t2_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1723,7 +1723,7 @@ class Stadium():
 
                     if type(t1_P.ptype) == str and t2_P.hp > 0:
                         t2_attack = 0
-                        while t2_attack < 1:
+                        if t2_attack < 1:
                             if (t1_P.ptype not in (t2_P.skill_list[t2_S - 1][3] or t2_P.skill_list[t2_S - 1][4] or t2_P.skill_list[t2_S - 1][5])) and (t1_P.ptype not in (t2_P.skill_list[t2_S - 1][3] or t2_P.skill_list[t2_S - 1][4] or t2_P.skill_list[t2_S - 1][5])):
                                 if random.choice(range(101)) in range(t2_P.skill_list[t2_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1737,7 +1737,7 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t2_attack += 1
-                            
+                        if t2_attack < 1:
                             if t2_P.skill_list[t2_S - 1][5] != 0 and (t1_P.ptype in t2_P.skill_list[t2_S - 1][5] or t1_P.ptype in t2_P.skill_list[t2_S - 1][5]):
                                 print("효과가 없는 것 같다.")
                                 t2_attack += 1
@@ -1755,7 +1755,7 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t2_attack += 1
-
+                        if t2_attack < 1:
                             if t2_P.skill_list[t2_S - 1][3] != 0 and (t1_P.ptype in t2_P.skill_list[t2_S - 1][3] or t1_P.ptype in t2_P.skill_list[t2_S - 1][3]):
                                 if random.choice(range(101)) in range(t2_P.skill_list[t2_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1781,7 +1781,7 @@ class Stadium():
 
                     if type(t1_P.ptype) == tuple:
                         t2_attack = 0
-                        while t2_attack < 1:
+                        if t2_attack < 1:
                             if (t1_P.ptype[0] not in (t2_P.skill_list[t2_S - 1][3] or t2_P.skill_list[t2_S - 1][4] or t2_P.skill_list[t2_S - 1][5])) and (t1_P.ptype[1] not in (t2_P.skill_list[t2_S - 1][3] or t2_P.skill_list[t2_S - 1][4] or t2_P.skill_list[t2_S - 1][5])):
                                 if random.choice(range(101)) in range(t2_P.skill_list[t2_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1799,7 +1799,7 @@ class Stadium():
                             if t2_P.skill_list[t2_S - 1][5] != 0 and (t1_P.ptype[0] in t2_P.skill_list[t2_S - 1][5] or t1_P.ptype[1] in t2_P.skill_list[t2_S - 1][5]):
                                 print("효과가 없는 것 같다.")
                                 t2_attack += 1
-
+                        if t2_attack < 1:
                             if t2_P.skill_list[t2_S - 1][4] != 0 and (t1_P.ptype[0] in t2_P.skill_list[t2_S - 1][4] or t1_P.ptype[1] in t2_P.skill_list[t2_S - 1][4]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1813,7 +1813,7 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t2_attack += 1
-
+                        if t2_attack < 1:
                             if t2_P.skill_list[t2_S - 1][3] != 0 and (t1_P.ptype[0] in t2_P.skill_list[t2_S - 1][3] or t1_P.ptype[1] in t2_P.skill_list[t2_S - 1][3]):
                                 if random.choice(range(101)) in range(t2_P.skill_list[t2_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1830,7 +1830,7 @@ class Stadium():
 
                     if type(t1_P.ptype) == str:
                         t2_attack = 0
-                        while t2_attack < 1:
+                        if t2_attack < 1:
                             if (t1_P.ptype not in (t2_P.skill_list[t2_S - 1][3] or t2_P.skill_list[t2_S - 1][4] or t2_P.skill_list[t2_S - 1][5])) and (t1_P.ptype not in (t2_P.skill_list[t2_S - 1][3] or t2_P.skill_list[t2_S - 1][4] or t2_P.skill_list[t2_S - 1][5])):
                                 if random.choice(range(101)) in range(t2_P.skill_list[t2_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1844,11 +1844,11 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t2_attack += 1
-                            
+                        if t2_attack < 1:    
                             if t2_P.skill_list[t2_S - 1][5] != 0 and (t1_P.ptype in t2_P.skill_list[t2_S - 1][5] or t1_P.ptype in t2_P.skill_list[t2_S - 1][5]):
                                 print("효과가 없는 것 같다.")
                                 t2_attack += 1
-
+                        if t2_attack < 1:
                             if t2_P.skill_list[t2_S - 1][4] != 0 and (t1_P.ptype in t2_P.skill_list[t2_S - 1][4] or t1_P.ptype in t2_P.skill_list[t2_S - 1][4]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1862,7 +1862,7 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t2_attack += 1
-
+                        if t2_attack < 1:
                             if t2_P.skill_list[t2_S - 1][3] != 0 and (t1_P.ptype in t2_P.skill_list[t2_S - 1][3] or t1_P.ptype in t2_P.skill_list[t2_S - 1][3]):
                                 if random.choice(range(101)) in range(t2_P.skill_list[t2_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1879,7 +1879,7 @@ class Stadium():
 
                     if type(t2_P.ptype) == tuple and t1_P.hp > 0:
                         t1_attack = 0
-                        while t1_attack < 1:
+                        if t1_attack < 1:
                             if (t2_P.ptype[0] not in (t1_P.skill_list[t1_S - 1][3] or t1_P.skill_list[t1_S - 1][4] or t1_P.skill_list[t1_S - 1][5])) and (t2_P.ptype[1] not in (t1_P.skill_list[t1_S - 1][3] or t1_P.skill_list[t1_S - 1][4] or t1_P.skill_list[t1_S - 1][5])):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1893,11 +1893,11 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t1_attack += 1
-                            
+                        if t1_attack < 1:   
                             if t1_P.skill_list[t1_S - 1][5] != 0 and (t2_P.ptype[0] in t1_P.skill_list[t1_S - 1][5] or t2_P.ptype[1] in t1_P.skill_list[t1_S - 1][5]):
                                 print("효과가 없는 것 같다.")
                                 t1_attack += 1
-
+                        if t1_attack < 1:
                             if t1_P.skill_list[t1_S - 1][4] != 0 and (t2_P.ptype[0] in t1_P.skill_list[t1_S - 1][4] or t2_P.ptype[1] in t1_P.skill_list[t1_S - 1][4]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1911,7 +1911,7 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t1_attack += 1
-
+                        if t1_attack < 1:
                             if t1_P.skill_list[t1_S - 1][3] != 0 and (t2_P.ptype[0] in t1_P.skill_list[t1_S - 1][3] or t2_P.ptype[1] in t1_P.skill_list[t1_S - 1][3]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1928,7 +1928,7 @@ class Stadium():
 
                     if type(t2_P.ptype) == str and t1_P.hp > 0:
                         t1_attack = 0
-                        while t1_attack < 1:
+                        if t1_attack < 1:
                             if (t2_P.ptype not in (t1_P.skill_list[t1_S - 1][3] or t1_P.skill_list[t1_S - 1][4] or t1_P.skill_list[t1_S - 1][5])) and (t2_P.ptype not in (t1_P.skill_list[t1_S - 1][3] or t1_P.skill_list[t1_S - 1][4] or t1_P.skill_list[t1_S - 1][5])):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1942,11 +1942,11 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t1_attack += 1
-                            
+                        if t1_attack < 1:    
                             if t1_P.skill_list[t1_S - 1][5] != 0 and (t2_P.ptype in t1_P.skill_list[t1_S - 1][5] or t2_P.ptype in t1_P.skill_list[t1_S - 1][5]):
                                 print("효과가 없는 것 같다.")
                                 t1_attack += 1
-
+                        if t1_attack < 1:
                             if t1_P.skill_list[t1_S - 1][4] != 0 and (t2_P.ptype in t1_P.skill_list[t1_S - 1][4] or t2_P.ptype in t1_P.skill_list[t1_S - 1][4]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1960,7 +1960,7 @@ class Stadium():
                                 else:
                                     print(f"앗! 공격이 빗나갔다.")
                                     t1_attack += 1
-
+                        if t1_attack < 1:
                             if t1_P.skill_list[t1_S - 1][3] != 0 and (t2_P.ptype in t1_P.skill_list[t1_S - 1][3] or t2_P.ptype in t1_P.skill_list[t1_S - 1][3]):
                                 if random.choice(range(101)) in range(t1_P.skill_list[t1_S - 1][2]):
                                     if random.choice(range(16)) == 1:
@@ -1983,9 +1983,10 @@ class Stadium():
                 print(f"{t2_P.name}은/는 더 이상 싸울 수 없다!")
                 t2_D.append(t2_P)
                 # self.t2.mon_set.pop(self.t2.mon_set[t1_S - 1])
-        if t1_D == 6:
+
+        if len(t1_D) == 6:
             print(f"{self.t1.Tname}은/는 싸울 포켓몬이 없다!\n{self.t2.Tname}의 승리!")
-        if t2_D == 6:
+        if len(t2_D) == 6:
             print(f"{self.t2.Tname}은/는 싸울 포켓몬이 없다!\n{self.t1.Tname}의 승리!")
             
 
