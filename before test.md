@@ -533,13 +533,33 @@ for x in range(1, 50):
 
 ### 딕셔너리 (Dictionary)
 
-`.pop(key, 반환할 값)` : `key`가 `dict`에 있으면 제거하고 `value`를 반환, `dict`에 입력한 `key`가 없을 경우 반환할 값을 반환
+`.pop(key, 반환할 값)` : `key`가 `dict`에 있으면 제거하고 `value`를 반환, 입력한 `key`가 없을 경우 반환할 값을 반환, 반환할 값 입력 안 한 상태에서 `key`가 없으면 키 에러
+
+`.get(key, 반환할 값)` : `key`가 있으면 `value`를 가져옴, 입력한 `key`가 없을 경우 반환할 값을 반환, 반환할 값을 입력 안 해도 에러가 나지 않음
 
 `.update()` : `key`에 해당하는 `value`를 덮어쓸 수 있음
 
+```python
+test = { "A": "a", "apple": "iphone", "galaxy": "note" }
 
+test.pop("A") == "a" => test == { "apple": "iphone", "galaxy": "note" }
+test.pop("LG", "으앙") == "으앙"
+test.get("galaxy") == "note" => test == { "A": "a", "apple": "iphone", "galaxy": "note" }
+```
 
+### Dictionary Comprehension
 
+```python
+test = { 넣을 key: 넣을 value for i in iterable }
+
+cubic_dict = { x: x ** 3 for x in range(1, 10) }
+# cubic_dict == { 1: 3, 2: 8, 3: 27, 4: 64 ... }
+
+dusts = { "seoul" : 103, "kyungki" : 79, "daejeon" : 36, "beijing" : 500 }
+hell = { x : y for x, y in dusts.items() if y > 80 }
+
+# hell == { "seoul": 103, "beijing": 500 }
+```
 
 
 
