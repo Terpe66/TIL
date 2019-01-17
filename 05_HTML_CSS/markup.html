@@ -9,9 +9,79 @@
                 border: 1px solid darkgray;
             }
         </style>
+        <!-- <style> </style>
+        아래 실제 div 태그에 style이 있으면 적용되지 않음 -->
     </head>
     
     <body>
+        <h1>싸늘하다...</h1>
+        <img src="./animals/pan.jpg" width=1400 alt="beast">
+    
+        <form>
+                ID:
+                <input type="text" name="user_ID" value="User">
+                <br>
+                PWD:
+                <input type="password" name="user_PWD" value="****">
+                <input type="button" value="로그인"/>
+                </form>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+        </ul>
+    
+        <p>
+            <strong><i>This</i></strong> <em>is</em> <strong>SSAFY 1st</strong>
+        </p>
+    
+        <blockquote>
+            Real Artist Ship
+        </blockquote>
+    
+    
+        <!-- CSS는 body 태그의 영역 -->
+    <h1>I'm h1</h1>
+    <ul>
+        <li><a href="https://google.com">Google</a></li>
+        <li><a href="naver.com">Naver</a></li>
+        <li><a id="TIL" href="github.com">Github</a></li>
+    </ul>
+    
+    <h2>I'm h2</h2>
+    <div id="exec-bio" class="bio-box">
+        <!-- id는 중복될 수 없음 한 요소에 하나만, 숫자로 시작할 수 없음 띄어쓰기는 -로
+             class는 여러 가지를 가질 수 있음 띄어쓰기로 구분함 -->
+
+        <a href="">I'm a Link</a>
+    </div>
+    <div class="bio-box box">
+        <a href="">I'm a Link</a>
+    </div>
+    <div class="bio-box box">
+        <a href="">I'm a Link</a>
+    </div>
+    <div class="bio-box box">
+        <a href="">I'm a Link</a>
+    </div>
+
+       
+    
+    
+    
+        <!-- <header></header>
+        <nav></nav>
+        <aside></aside>
+        <section>
+            <article></article>
+        </section>
+        <footer></footer>
+        -->
+    
+    
+
+
+
+
         <h1>프로그래밍 교육</h1>
         <a href="https://ko.wikipedia.org/wiki/파이썬" target="_blank">
         <!--
@@ -139,6 +209,76 @@
             table>tr>th*3
             table 안에 table row 안에 table header 3개
         -->
+        
+        <h3>Form</h3>
+        <p>자기소개하기</p>
+        <form action="./index.html">
+            <div>
+                이름 : <input name="name" type="text" placeholder="이름을 입력해주세요" />
+            </div>
+            <div>
+                나이 : <input name="age" type="number" />
+            </div>
+            <div>
+                Phone : <input name="phone" type="text" />
+            </div>
+            <div>
+                자기소개 : <textarea name="intro"></textarea>
+            </div>
+            <div>
+                <input type="submit" />
+            </div>
+
+        </form>
+        <p>주문서를 작성해주세요</p>
+        <form action="">
+            <div>
+                이름 : <input name="name" type="text" placeholder="이름을 입력하세요" autofocus />
+                <!-- autofocus가 있으면 페이지 나오자마자 그 위치로 이동-->
+            </div>
+            <div>
+                날짜 : <input name="date" type="date" />
+            </div>
+            <p><strong>1. 샌드위치 선택</strong></p>
+            <!-- radio : 동그란 체크, 리스트 중 하나만 선택 됨 -->
+            <div>
+                <input type="radio" name="sandwich" value="1" /> 스테이크
+                <input type="radio" name="sandwich" value="2" /> 터키 아보카도
+                <input type="radio" name="sandwich" value="3" /> 미트볼
+            </div>
+
+            <p><strong>2. 사이즈 선택</strong></p>
+            <div>
+            <!-- number -->
+                <input type="number" name="size" min="15" max="30" step="15" value="15" /> cm
+            </div>
+            
+            <div>
+            <p><strong>3. 빵</strong></p>
+            <!-- option : 아래로 펼쳐지면서 나오는 체크 리스트 -->
+            <select name="bread">
+                <option value="1">허니오트</option> 
+                <option value="2">플랫브레드</option> 
+                <option value="3">하티 이탈리안</option> 
+            </select>
+            </div>
+            
+            <div>
+            <p><strong>4. 소스</strong></p>
+            <!-- 체크박스 : 네모 체크, 리스트 중 여러 가지 선택 가능 -->
+            <!-- <input type="checkbox" name="option[source]" value="1" /> 서버가 있으면 뭐가 달라진대 -->
+                <input type="checkbox" name="source" value="1" /> 핫 칠리
+                <input type="checkbox" name="source" value="2" /> 스위트 칠리
+                <input type="checkbox" name="source" value="3" /> 랜치
+                <input type="checkbox" name="source" value="4" /> 홀스 래디쉬
+                <input type="checkbox" name="source" value="5" /> 스위트 어니언
+            </div>
+
+            <div>
+            <!-- Subway!로 바꾸기 -->
+                <input type="submit" value="Subway!">
+            </div>
+        </form>
 
 
         

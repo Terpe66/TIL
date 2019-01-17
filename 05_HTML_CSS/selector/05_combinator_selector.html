@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    /* 후손-자식 셀렉터 */
+        div p { color: red; }
+        /* div 요소의 후손(n level) 요소 중 p 요소 전체 */
+        div > p { color: mediumaquamarine; }
+        /* div 요소의 자식(1 level 요소 중 p 전체 */
+    /* sibling 셀렉터 */
+        p + ul { color: lightsalmon; }
+        /* p의 sibling 요소 중에 바로 뒤에(바로 밑) 오는 ul 요소 */
+        div ~ p { color: lime; }
+        /* div랑 형제인 p, div의 sibling 요소 중에 뒤에(아래) 오는 p 요소 */
+    </style>
+</head>
+<body>
+    <h1>Heading</h1>    
+    <div>
+        <p>문단 1</p>
+        <p>문단 2</p>
+        <span>
+            <p>문단 3</p>
+        </span>
+    </div>
+    <p>문단 4</p>
+    <!-- 한 탭 차이면 부모 자식, 그 이후는 하위 -->
+
+    <div>A div element.</div>
+    <ul>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ul>
+
+    <p>First Paragraph</p>
+    <ul>
+        <li>Latte</li>
+        <li>Choco</li>
+        <li>Water</li>
+    </ul>
+
+    <h2>Another list</h2>
+    <ul>
+        <li>Mango</li>
+        <li>Grape</li>
+        <li>Orange</li>
+    </ul>
+
+</body>
+
+</html>
