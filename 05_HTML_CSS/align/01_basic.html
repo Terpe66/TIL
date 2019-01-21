@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .box {
+            color: lightcyan;
+            font-weight: bold;
+            font-size: 50px;
+            border-radius: 6px;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            padding: 10px;
+            /* moz 파이어폭스, webkit 크롬 엣지, ms 익스플로러 */
+        }
+
+        /* img {
+            /* 이미지 옆에 글자가 올라오게 됨 */
+        /* float: left;
+            margin-right: 15px;
+        } */
+        .d1, .d2 {
+            float: left;
+        }
+        .d1 {
+            background: lightcoral;
+        }
+        .d2 {
+            background: lightgoldenrodyellow;
+        }
+        .d3, .d4 {
+            float: right;
+        }
+        .d3 {
+            background: lightblue;
+        }
+        .d4 {
+            background: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- img는 inline -->
+    <!-- <img src="https://lorempixel.com/100/100" alt="random"> -->
+    <div class="container">
+        <div class="box d1"> 1 </div>
+        <div class="box d2"> 2 </div>
+        <div class="box d3"> 3 </div>
+        <div class="box d4"> 4 </div>
+    </div>
+</body>
+
+</html>

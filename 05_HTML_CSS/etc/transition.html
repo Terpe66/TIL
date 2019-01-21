@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        div.circle {
+            width: 100px;
+            height: 50px;
+            background: lightcoral;
+            /* div에 hover가 있을 때 transition을 하겠다는 얘기 */
+            transition: all 1s;
+            text-align: center;
+            margin: auto;
+        }
+        /* hover가 div transition의 trigger */
+        div.circle:hover {
+            border-radius: 50%;
+            background: lightblue;
+        }
+        div.status-bar {
+            width: 200px;
+            height: 50px;
+            background-color: lavenderblush;
+            margin: auto;
+            margin-bottom: 10px;
+            transition-property: width, background-color;
+            transition-duration: 1.2s, 0.8s;
+            text-align: center;
+        }
+        div.status-bar:hover {
+            width: 500px;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="circle">외않됀데?</div>
+    <div class="status-bar">외않됀데?</div>
+</body>
+
+</html>
