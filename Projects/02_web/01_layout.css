@@ -1,0 +1,58 @@
+header {
+    height: 350px;
+    background-image: url("./images/header.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+}
+
+header div {
+    min-width: 200px;
+    width: 50%;
+    height: 250px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+    border: 2px solid lightgreen;
+    background-color: rgba(170, 245, 250, 0.5);
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h2 {
+    margin: auto auto;
+    /* font-size: 1.65vw; */
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+footer {
+    margin-top: auto;
+    background-color: rgb(33, 37, 31);
+    color: lightskyblue;
+    height: 56px;
+    display: flex;
+    padding: 0 3rem 0 3rem;
+}
+
+footer p {
+    font-size: 20px;
+    margin-left: 2%;
+    margin-top: auto;
+    margin-bottom: auto;
+    flex: 0 0 auto;
+    font-family: 'Jua', sans-serif;
+}
+
+footer a {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+/* body {
+    height: 1000px;
+} */
