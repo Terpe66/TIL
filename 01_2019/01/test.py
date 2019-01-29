@@ -1,95 +1,29 @@
-class Dog:
-    num_of_dogs = 0
-    birth_of_dogs = 0
-    list_of_dogs = []
+class LocalWeather(models.Model):
+    location = models.CharField(max_length=100)
+    status = models.BooleanField(default=True)
+    latitude = models.FloatField(default=0.0)
+    longitude = models.FloatField(default=0.0)
+    temperature = models.FloatField(default=0.0)
+    summary = models.CharField(max_length=50)
+    search_time = models.DateTimeField("date published")
+
+    def get_weather(input_location):
+    from darksky import forecast
+    from geopy.geocoders import Nominatim
+    from datetime import datetime
     
-    def __init__(self, name, breed):
-        self.name = name
-        self.breed = breed
-        Dog.num_of_dogs += 1
-        Dog.birth_of_dogs += 1
-        Dog.list_of_dogs.append(self.name)
-        
-    def __del__(self):
-        Dog.num_of_dogs -= 1
-        
-    def bark(self):
-        return "멍멍!"
+    API_KEY = "7cbe2c49b01ebc4a748fca21952f5404"
+    geo = Nominatim(user_agent="wj weather app")
     
-    @staticmethod
-    # 스태틱 메소드는 self 안 넣음
-    def info():
-        return f"개다!"
-    # 예시는 return f"총 {Dog.num_of_dogs}마리의 개가 있습니다." 였지만, 스태틱 메소드는 클래스에 접근 안 할 때 쓰는 게 좋아서 변경
-    
-    @classmethod
-    def birth(cls):
-        return f"Birth: {cls.birth_of_dogs}, Current: {cls.num_of_dogs}"
-#         return f"총 {cls.birth_of_dogs}마리의 개가 태어났습니다."
+    l = geo.geocode(input_location)
+    lat = l.latitude
+    lon = l.longitude
+    location = forecast(API_KEY, lat, lon)
+    temperature = round((location.currently["temperature"]-32)/1.8, 2)
+    summary = location.currently["summary"]
+    t = datetime.utcfromtimestamp(location.time)
+    return (lat, lon, temperature, summary, t)
 
-d = Dog("choco", "poodle")
-# instance method
-print(d.bark())
 
-# static method
-print(d.info())
-print(Dog.info())
 
-# class method
-print(Dog.birth())
 
-d1 = Dog("초코", "푸들")
-d1.bark()
-d2 = Dog("꽁이", "말티즈")
-d2.bark()
-d3 = Dog("시바", "시바")
-d3.bark()
-print(Dog.num_of_dogs)
-
-class Dog:
-    num_of_dogs = 0
-    birth_of_dogs = 0
-    list_of_dogs = []
-    
-    def __init__(self, name, breed):
-        self.name = name
-        self.breed = breed
-        Dog.num_of_dogs += 1
-        Dog.birth_of_dogs += 1
-        Dog.list_of_dogs.append(self.name)
-        
-    def __del__(self):
-        Dog.num_of_dogs -= 1
-        
-    def bark(self):
-        return "멍멍!"
-    
-    @staticmethod
-    # 스태틱 메소드는 self 안 넣음
-    def info():
-        return f"개다!"
-    # 예시는 return f"총 {Dog.num_of_dogs}마리의 개가 있습니다." 였지만, 스태틱 메소드는 클래스에 접근 안 할 때 쓰는 게 좋아서 변경
-    
-    @classmethod
-    def birth(cls):
-        return f"Birth: {cls.birth_of_dogs}, Current: {cls.num_of_dogs}"
-#         return f"총 {cls.birth_of_dogs}마리의 개가 태어났습니다."
-
-d = Dog("choco", "poodle")
-# instance method
-print(d.bark())
-
-# static method
-print(d.info())
-print(Dog.info())
-
-# class method
-print(Dog.birth())
-
-d1 = Dog("초코", "푸들")
-d1.bark()
-d2 = Dog("꽁이", "말티즈")
-d2.bark()
-d3 = Dog("시바", "시바")
-d3.bark()
-print(Dog.num_of_dogs)
