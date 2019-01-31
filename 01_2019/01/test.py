@@ -1,29 +1,41 @@
-class LocalWeather(models.Model):
-    location = models.CharField(max_length=100)
-    status = models.BooleanField(default=True)
-    latitude = models.FloatField(default=0.0)
-    longitude = models.FloatField(default=0.0)
-    temperature = models.FloatField(default=0.0)
-    summary = models.CharField(max_length=50)
-    search_time = models.DateTimeField("date published")
+class Point():
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
-    def get_weather(input_location):
-    from darksky import forecast
-    from geopy.geocoders import Nominatim
-    from datetime import datetime
+
+class Circle():
+    def __init__(self, center, r):
+        self.center = center
+        self.r = r
     
-    API_KEY = "7cbe2c49b01ebc4a748fca21952f5404"
-    geo = Nominatim(user_agent="wj weather app")
-    
-    l = geo.geocode(input_location)
-    lat = l.latitude
-    lon = l.longitude
-    location = forecast(API_KEY, lat, lon)
-    temperature = round((location.currently["temperature"]-32)/1.8, 2)
-    summary = location.currently["summary"]
-    t = datetime.utcfromtimestamp(location.time)
-    return (lat, lon, temperature, summary, t)
+    def get_area(self):
+        return round(3.14 * self.r * self.r, 2)
+
+    def get_perimeter(self):
+        return round(2 * 3.14 * self.r, 2)
+
+    def get_center(self):
+        return self.center.x, self.center.y
+
+    def print(self):
+        print(f"Circle: {(self.center.x, self.center.y)}, r: {self.r}")
 
 
 
 
+
+
+p1 = Point(0, 0)
+c1 = Circle(p1, 3)
+print(c1.get_area())
+print(c1.get_perimeter())
+print(c1.get_center())
+c1.print()
+
+p2 = Point(4, 5)
+c2 = Circle(p2, 1)
+print(c2.get_area())
+print(c2.get_perimeter())
+print(c2.get_center())
+c2.print()
