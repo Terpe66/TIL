@@ -1,0 +1,9 @@
+<h1>회원가입 & 로그인 테스트</h1>
+
+<h2>
+    {% if user.is_authenticated %}
+        <a href="{% url 'accounts:signout' %}">Logout - 로그아웃</a>
+    {% else %}
+        <a href="{% url 'accounts:signin' %}">Login - 로그인</a>
+    {% endif %}
+</h2>
