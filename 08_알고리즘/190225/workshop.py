@@ -7,7 +7,7 @@ for t in range(10):
     ans = []
     G = [[] for _ in range(V + 1)]
     visit = [[] for _ in range(V + 1)]
-
+    empty = [[]] * (V + 1)
     g = list(map(int, input().split()))
     for i in range(0, len(g), 2):
         G[g[i]].append(g[i+1])
@@ -15,27 +15,23 @@ for t in range(10):
 
     start = 1
     print(f"#{t+1}", end=" ")
-    while not G == [[]] * (V+1):
+    while G != empty:
         if G[start] and not visit[start]:
             S.append(start)
-            for m in G[start]:
-                G[start].remove(m)
-                visit[m].remove(start)
-                if not G[start] and not visit[start]:
-                    ans.append(start)
-                start = m
-                break
-        elif not G[start] and not visit[start] and start not in ans:
-            start = S[-1]
-            S.append(start)
-        elif S and not G[start]:
-            start = S.pop()
+            if start not in ans:
+                ans.append(start)
+            m = G[start][0]
+            G[start].remove(m)
+            visit[m].remove(start)
+            start = m
+            if not G[start] and not visit[start]:
+                ans.append(start)
+                start = S.pop()
         else:
             if start < V:
                 start += 1
             else:
-                start = 0
-    ans.append(start)
+                start = 1
 
     for i in ans:
         print(i, end=" ")
