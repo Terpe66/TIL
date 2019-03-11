@@ -29,7 +29,7 @@ for t in range(int(input())):
                             if ridx < N:
                                 board[row][col], board[ridx][col] = board[ridx][col], 0
                         row += 1
-                        ridx = row + 1
+                        ridx += 1
                     break
 
                 if board[row][col] == board[ridx][col]:
@@ -51,15 +51,15 @@ for t in range(int(input())):
                     ridx -= 1
 
                 if row < 0 or ridx < 0:
-                    row = N-1
-                    while row > 0:
+                    row, ridx = N-1, N-2
+                    while row >= 0 and ridx >= 0:
                         if not board[row][col]:
-                            ridx = row - 1
                             while ridx >= 0 and not board[ridx][col]:
                                 ridx -= 1
                             if ridx >= 0:
                                 board[row][col], board[ridx][col] = board[ridx][col], 0
                         row -= 1
+                        ridx = ridx - 1
                     break
 
                 if board[row][col] == board[ridx][col]:
@@ -81,15 +81,15 @@ for t in range(int(input())):
                     cidx += 1
 
                 if col >= N or cidx >= N:
-                    col = 0
-                    while col < N:
+                    col, cidx = 0, 1
+                    while col < N and cidx < N:
                         if not board[row][col]:
-                            cidx = col+1
                             while cidx < N and not board[row][cidx]:
                                 cidx += 1
                             if cidx < N:
                                 board[row][col], board[row][cidx] = board[row][cidx], 0
                         col += 1
+                        cidx = cidx + 1
                     break
 
                 if board[row][col] == board[row][cidx]:
@@ -111,15 +111,15 @@ for t in range(int(input())):
                     cidx -= 1
 
                 if col < 0 or cidx < 0:
-                    col = N-1
-                    while col > 0:
+                    col, cidx = N-1, N-2
+                    while col >= 0 and cidx >= 0:
                         if not board[row][col]:
-                            cidx = col - 1
                             while cidx >= 0 and not board[row][cidx]:
                                 cidx -= 1
                             if cidx >= 0:
                                 board[row][col], board[row][cidx] = board[row][cidx], 0
                         col -= 1
+                        cidx = cidx - 1
                     break
 
                 if board[row][col] == board[row][cidx]:
