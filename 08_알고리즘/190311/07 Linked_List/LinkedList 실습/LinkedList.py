@@ -67,15 +67,30 @@ class List:
         else:
             cur = self.head
             if cur.next is None:
-                del cur
-                self.head = None
+                self.head = self.tail = None
             else:
-                n = cur.next
-                self.head = n
-                del cur
+                self.head = cur.next
+            del cur
+            self.size -= 1
 
     def insertAt(self, idx, val):
-        pass
+        if self.head is None:
+            self.insertfirst(val)
+        elif idx >= self.size:
+            self.insertlast(val)
+        else:
+            prev, cur = None, self.head
+            for i in range(idx):
+                prev = cur
+                cur = cur.next
+
+            if prev is None:
+                self.insertfirst(val)
+            else:
+                node = Node(val)
+                node.next = prev.next
+                prev.next = node
+            self.size += 1
 
     def deleteAt(self, idx):
         pass
