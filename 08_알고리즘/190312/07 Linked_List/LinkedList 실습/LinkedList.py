@@ -1,11 +1,11 @@
 class Node:
     def __init__(self, data):
+        self.prev = None
         self.data = data
         self.next = None
 
-    def __del__(self):
-        print(self.data, '삭제')
-
+    # def __del__(self):
+    #     print(self.data, '삭제')
 
 class List:
     def __init__(self):
@@ -88,6 +88,8 @@ class List:
                 self.insertfirst(val)
             else:
                 node = Node(val)
+                cur.prev = node
+                node.prev = prev
                 node.next = prev.next
                 prev.next = node
             self.size += 1
