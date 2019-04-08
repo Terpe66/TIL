@@ -1,0 +1,25 @@
+{% extends "board/base.html" %}
+
+{% block title %} - list{% endblock %}
+
+{% block body %}
+    <table>
+        <th>
+            <td>Title</td>
+            <td>Content</td>
+        </th>
+        {% for article in articles %}
+        <tr>
+            <td>
+                {{ article.id }}
+            </td>
+            <td>
+                {{ article.title }}
+            </td>
+            <td>
+                {{ article.content }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
