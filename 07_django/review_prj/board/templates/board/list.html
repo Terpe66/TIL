@@ -3,21 +3,19 @@
 {% block title %} - list{% endblock %}
 
 {% block body %}
+    <a href="{% url 'board:new' %}"><input type="submit" value="create"></a>
     <table>
-        <th>
+        <tr>
+            <td>ID</td>
             <td>Title</td>
-            <td>Content</td>
-        </th>
+        </tr>
         {% for article in articles %}
         <tr>
             <td>
                 {{ article.id }}
             </td>
             <td>
-                {{ article.title }}
-            </td>
-            <td>
-                {{ article.content }}
+                <a href="{% url 'board:detail' article.id %}">{{ article.title }}</a>
             </td>
         </tr>
         {% endfor %}

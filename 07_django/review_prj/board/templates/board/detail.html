@@ -3,4 +3,30 @@
 {% block title %} - detail{% endblock %}
 
 {% block body %}
+    <table>
+        <tr>
+            <td>
+                Title
+            </td>
+            <td>
+                Content
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ article.title }}
+            </td>
+            <td>
+                {{ article.content }}
+            </td>
+        </tr>
+    </table>
+    <div>
+    <form action="{% url 'board:delete' article.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">delete</button>
+    <a href="{% url 'board:list' %}"><button>list</button></a>
+    <a href="{% url 'board:edit' article.id %}"><button type="submit">edit</button></a>
+    </form>
+    </div>
 {% endblock %}

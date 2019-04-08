@@ -8,28 +8,36 @@ def article_list(request):
 
 def article_new(request):
     if request.method == "POST":
+        article = Article()
+        article.title = request.POST.get("title")
+        article.content = request.POST.get("content")
+        article.save()
+        return redirect("board:list")
 
-
-        pass
-    return True
+    return render(request, "board/new.html")
 
 
 def article_detail(request, id):
-    if request.method == "POST":
-        pass
-    return True
+    article = get_object_or_404(Article, id=id)
+    return render(request, "board/detail.html", {"article":article})
 
 
 def article_edit(request, id):
+    article = get_object_or_404(Article, id=id)
     if request.method == "POST":
-        pass
-    return True
+        article.title = request.POST.get("title")
+        article.content = request.POST.get("content")
+        article.save()
+        return redirect("board:detail")
+
+    return render(request, "board/edit.html", {"article":article})
 
 
 def article_delete(request, id):
     if request.method == "POST":
-        pass
-    return True
+        article = get_object_or_404(Article, id=id)
+        article.delete()
+    return redirect("board:list")
 
 
 

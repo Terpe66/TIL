@@ -9,6 +9,6 @@ urlpatterns = [
     path("articles/", views.article_list, name="list"),
     path("articles/new/", views.article_new, name="new"),
     path("articles/<int:id>/", views.article_detail, name="detail"),
-    path("articles/edit/<int:id>", views.article_edit, name="edit"),
-    path("articles/delete/<int:id>", views.article_delete, name="delete"),
+    path("articles/<int:id>/edit", views.article_edit, name="edit"),
+    path("articles/<int:id>/delete", views.article_delete, name="delete"),
 ]
