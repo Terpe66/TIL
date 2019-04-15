@@ -46,6 +46,7 @@ class Hotel(models.Model):
 #     def __str__(self):
 #         return f"{self.id} : {self.major} {self.name}"
 #
+# Student 1 : N Enrollment N : 1 Lecture
 #
 # class Lecture(models.Model):
 #     title = models.CharField(max_length=100)

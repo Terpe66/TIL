@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "posts",
     "mton",
     "bootstrap4",
+    "onetomany",
+    "onetoone",
 ]
 
 MIDDLEWARE = [
