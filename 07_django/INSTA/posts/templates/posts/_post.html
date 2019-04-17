@@ -1,5 +1,7 @@
+{% load bootstrap4 %}
+
 <article class="card my-3">
-    {% if post.image_set %}
+    {% if post.image_set.all %}
         <div id="post{{ post.id }}" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
                 {% for image in post.image_set.all %}
@@ -23,8 +25,34 @@
     {% endif %}
 
     <div class="card-body">
-        <h5 class="card-title">card title</h5>
-        <p class="card-text">{{ p.content }}</p>
+        <p class="card-text">작성자 : {{ post.user.username }}</p>
+        <p class="card-text">내용 : {{ post.content }}</p>
+
+        {% if post.user == user %}
         <a href="{% url 'posts:update_post' post.id %}" class="btn btn-warning">수정</a>
+        {% endif %}
+
+        <div class="my-5">
+            {% if post.comment_set.all %}
+                {% for comment in post.comment_set.all %}
+                <p class="card-text">
+                    <strong>{{ comment.user.username }}</strong> : {{ comment.content }}
+                </p>
+                {% endfor %}
+            {% else %}
+                <p class="card-text">
+                    댓글을 달아주세요!
+                </p>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <form action="{% url 'posts:create_comment' post.id %}" method="POST">
+                {% csrf_token %}
+            {% bootstrap_form comment_form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">댓글 달기</button>
+            {% endbuttons %}
+            </form>
+        </div>
     </div>
 </article>
