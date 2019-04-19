@@ -30,7 +30,10 @@ class Client(models.Model):
 
 class Hotel(models.Model):
     name = models.CharField(max_length=100)
-    clients = models.ManyToManyField(Client)
+    clients = models.ManyToManyField(Client, related_name="hotels")
+
+    def __str__(self):
+        return f"{self.id} : {self.name}"
 
     @classmethod
     def dummy(cls, n):
@@ -38,30 +41,30 @@ class Hotel(models.Model):
             cls.objects.create(name=SKT.company())
 
 #
-# class Student(models.Model):
-#     name = models.CharField(max_length=30)
-#     major = models.CharField(max_length=50)
-#     account = models.CharField(max_length=50)
-#
-#     def __str__(self):
-#         return f"{self.id} : {self.major} {self.name}"
-#
+class Student(models.Model):
+    name = models.CharField(max_length=30)
+    # major = models.CharField(max_length=50)
+    # account = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.id} : {self.name}"
+
 # Student 1 : N Enrollment N : 1 Lecture
-#
-# class Lecture(models.Model):
-#     title = models.CharField(max_length=100)
-#     classroom = models.CharField(max_length=30)
-#     credits = models.IntegerField()
-#     lecture_time = models.IntegerField()
-#     students = models.ManyToManyField(Student)
-#
-#     def __str__(self):
-#         return f"{self.id} : {self.title} {self.classroom}"
-#
-#
-# class Enrollment(models.Model):
-#     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-#     lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE)
-#
-#     def __str__(self):
-#         return f"{self.id} : {self.student.name} {self.lecture.title}"
+
+class Lecture(models.Model):
+    title = models.CharField(max_length=100)
+    # classroom = models.CharField(max_length=30)
+    # credits = models.IntegerField()
+    # lecture_time = models.IntegerField()
+    # students = models.ManyToManyField(Student)
+
+    def __str__(self):
+        return f"{self.id} : {self.title}"
+
+
+class Enrollment(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.id} : {self.student.name} {self.lecture.title}"

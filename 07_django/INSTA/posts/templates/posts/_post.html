@@ -25,7 +25,16 @@
     {% endif %}
 
     <div class="card-body">
-        <p class="card-text">작성자 : {{ post.user.username }}</p>
+        <form action="{% url 'posts:like' post.id %}" method="POST">
+            {% csrf_token %}
+            {% if user in post.like_users.all %}
+                <input type="image" id="image" src="../../../media/green.png" value="green" width="30">{{ post.like_users.all.count }}
+            {% else %}
+                <input type="image" id="image" src="../../../media/empty.png" value="empty" width="30">{{ post.like_users.all.count }}
+            {% endif %}
+        </form>
+
+        <p class="card-text">작성자 : <a href="{% url 'accounts:user_detail' post.user.username %}">{{ post.user.username }}</a></p>
         <p class="card-text">내용 : {{ post.content }}</p>
 
         {% if post.user == user %}
@@ -36,7 +45,7 @@
             {% if post.comment_set.all %}
                 {% for comment in post.comment_set.all %}
                 <p class="card-text">
-                    <strong>{{ comment.user.username }}</strong> : {{ comment.content }}
+                    <strong><a href="{% url 'accounts:user_detail' comment.user.username %}">{{ comment.user.username }}</a></strong> : {{ comment.content }}
                 </p>
                 {% endfor %}
             {% else %}

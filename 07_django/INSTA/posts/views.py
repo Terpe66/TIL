@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from .models import Post, Image
 from .forms import PostModelForm, ImageModelForm, CommentModelForm
@@ -64,4 +64,27 @@ def create_comment(request, post_id):
         comment.user = request.user
         comment.post = post
         comment.save()
-    return redirect("posts:post_list")
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/insta/"))
+    # TODO: else => if comment is not valid, then what?
+
+
+# @login_required()
+# @require_POST
+# def create_like(request, post_id):
+#     user = request.user
+#     post = get_object_or_404(Post, id=post_id)
+#     # user.like_posts.add(post) # 유저가 가진 정보를 add 하는 방법
+#     post.like_users.add(user) # 포스트에 유저를 더하는 방법
+#
+
+@login_required
+@require_POST
+def toggle_like(request, post_id):
+    user = request.user
+    post = get_object_or_404(Post, id=post_id)
+    # if post.like_users.filter(id=user.id).exist(): # 좋아요 한 사람이 있으면 값이 나오고 없으면 빈 리스트 # exist는 좀 더 명확하게 만드는 역할
+    if user in post.like_users.all():
+        post.like_users.remove(user)
+    else:
+        post.like_users.add(user)
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/insta/"))
