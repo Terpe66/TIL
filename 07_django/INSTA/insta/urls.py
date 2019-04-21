@@ -29,3 +29,10 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # if env dev => [...]
 # if env prod => None
+
+
+if settings.DEBUG: # 지금은 True
+    import debug_toolbar
+    urlpatterns = [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ] + urlpatterns
