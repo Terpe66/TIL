@@ -1,0 +1,27 @@
+{% load bootstrap4 %}
+
+<article class="card my-3">
+    <img src="https://picsum.photos/600/?random" class="card-img-top" alt="random-image">
+
+    <div class="card-body">
+        <a href="{% url 'posts:update_post' post.id %}" class="btn btn-warning">수정</a>
+        <div class="my-5">
+            {% if post.comment_set.all %}
+                {% for comment in post.comment_set.all %}
+                <p class="card-text">{{ comment.content }}</p>
+                {% endfor %}
+            {% else %}
+                <p class="card-text">댓글을 달아주세요!</p>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <form action="{% url 'posts:create_comment' post.id %}" method="POST">
+                {% csrf_token %}
+            {% bootstrap_form comment_form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">댓글 달기</button>
+            {% endbuttons %}
+            </form>
+        </div>
+    </div>
+</article>
