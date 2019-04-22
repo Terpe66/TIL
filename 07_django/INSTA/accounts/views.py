@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 # from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import CustomUserAuthenticationForm, CustomUserCreateForm
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import User
+from .forms import CustomUserAuthenticationForm, CustomUserCreateForm
 # from django.contrib.auth import get_user_model 위의 코드랑 같은 내용
 from posts.forms import CommentModelForm
 
@@ -28,7 +29,10 @@ def login(request):
     if request.method == "POST":
         form = CustomUserAuthenticationForm(request, data=request.POST) # 얘는 request, request.???로
         if form.is_valid():
+            user = form.get_user()
             auth_login(request, form.get_user())
+            messages.add_message(request, messages.SUCCESS, f"어서오세요! {user.username}")
+            messages.add_message(request, messages.INFO, f"이전 접속은 {user.last_login}입니다.")
             return redirect(request.GET.get("next") or "posts:post_list")
     else:
         form = CustomUserAuthenticationForm(request)
@@ -37,6 +41,7 @@ def login(request):
 @login_required
 def logout(request):
     auth_logout(request)
+    messages.add_message(request, messages.SUCCESS, "다음에 또 만나요")
     return redirect("posts:post_list")
 
 
@@ -57,3 +62,5 @@ def toggle_follow(request, username):
         else:
             sender.followings.add(receiver)
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/insta/"))
+
+
