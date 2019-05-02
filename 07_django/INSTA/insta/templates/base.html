@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% include "_cdns.html" %}
+    <style>
+        .activate {
+            color: dodgerblue;
+        }
+    </style>
     <title>Insta - {% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -15,5 +21,49 @@
     {% endblock %}
 </div>
 {% include "_scripts.html" %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function giveMeChoco(key="") {
+        const chocoBox = {};
+        document.cookie.split("; ").forEach(chocolate => {
+            const keyval = chocolate.split("=");
+            chocoBox[keyval[0]] = keyval[1];
+        });
+        {#return chocoBox;#}
+        return key ? chocoBox[key] : chocoBox
+    }
+
+    const likeButtons = document.querySelectorAll(".like-button");
+
+    giveMeChoco().csrftoken
+
+    likeButtons.forEach(button => {
+        button.addEventListener("click", e => {
+            const postId = button.dataset.id;
+            const URL = `/insta/${postId}/like/`;
+            // request에 cookie 중에 csrftoken이라는 key 값을 가진 친구를 같이 보내라
+            axios.defaults.xsrfCookieName = "csrftoken";
+            // request에 header 중에 X-CSRFToken이라는 key 값을 가진 친구를 같이 보내라
+            axios.defaults.xsrfHeaderName = "X-CSRFToken";
+            // 이 request는 XHR 방식으로 보내는 것입니다.
+            axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+            console.log(axios.defaults);
+            axios.post(URL, {})
+                .then(response => {
+                    const likeCountArea = document.querySelector(`#like-count-${postId}`);
+                    likeCountArea.innerHTML = response.data.likeCount;
+
+                    {#const btnClsList = e.target.classList;#}
+                    {#response.data.is_active ? btnClsList.add("activate") : btnClsList.remove("activate");#}
+
+                    if (response.data.is_active) {
+                        e.target.classList.add("activate");
+                    } else {
+                        e.target.classList.remove("activate");
+                    }
+                })
+        })
+    });
+</script>
 </body>
 </html>

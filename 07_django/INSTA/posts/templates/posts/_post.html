@@ -1,4 +1,5 @@
 {% load bootstrap4 %}
+{% load static %}
 
 <article class="card my-3">
     {% if post.image_set.all %}
@@ -10,43 +11,60 @@
                     </div>
                 {% endfor %}
             </div>
-            <a class="carousel-control-prev" href="#post{{post.id}}" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#post{{ post.id }}" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#post{{post.id}}" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#post{{ post.id }}" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
     {% else %}
-{#        <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.image }}">#}
+        {#        <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.image }}">#}
         <img src="https://picsum.photos/600/?random" class="card-img-top" alt="random-image">
     {% endif %}
 
     <div class="card-body">
+        <!-- 좋아요 버튼 1 -->
         <form action="{% url 'posts:like' post.id %}" method="POST">
             {% csrf_token %}
             {% if user in post.like_users.all %}
-                <input type="image" id="image" src="../../../media/green.png" value="green" width="30">{{ post.like_users.all.count }}
+                <input type="image" id="like_image" src="../../static/posts/green.png" value="green" width="30">
+                {{ post.like_users.all.count }}
             {% else %}
-                <input type="image" id="image" src="../../../media/empty.png" value="empty" width="30">{{ post.like_users.all.count }}
+                <input type="image" id="like_image" src="../../static/posts/empty.png" value="empty" width="30">
+                {{ post.like_users.all.count }}
             {% endif %}
         </form>
 
-        <p class="card-text">작성자 : <a href="{% url 'accounts:user_detail' post.user.username %}">{{ post.user.username }}</a></p>
+        <!-- 좋아요 버튼 2 -->
+        {% if user in post.like_users.all %}
+            <i class="like-button fas fa-thumbs-up fa-2x activate" data-id="{{ post.id }}"></i>
+{#            <input class="like-button" type="image" id="like-button" src="{% static 'posts/green.png' %}" width="30">#}
+        {% else %}
+            <i class="like-button fas fa-thumbs-up fa-2x" data-id="{{ post.id }}"></i>
+{#            <input class="like-button" type="image" id="like-button" src="{% static 'posts/empty.png' %}" width="30">#}
+        {% endif %}
+        <span id="like-count-{{ post.id }}">{{ post.like_users.count }}</span>
+
+
+        <p class="card-text">작성자 : <a
+                href="{% url 'accounts:user_detail' post.user.username %}">{{ post.user.username }}</a></p>
         <p class="card-text">내용 : {{ post.content }}</p>
 
         {% if post.user == user %}
-        <a href="{% url 'posts:update_post' post.id %}" class="btn btn-warning">수정</a>
+            <a href="{% url 'posts:update_post' post.id %}" class="btn btn-warning">수정</a>
         {% endif %}
 
         <div class="my-5">
             {% if post.comment_set.all %}
                 {% for comment in post.comment_set.all %}
-                <p class="card-text">
-                    <strong><a href="{% url 'accounts:user_detail' comment.user.username %}">{{ comment.user.username }}</a></strong> : {{ comment.content }}
-                </p>
+                    <p class="card-text">
+                        <strong><a
+                                href="{% url 'accounts:user_detail' comment.user.username %}">{{ comment.user.username }}</a></strong>
+                        : {{ comment.content }}
+                    </p>
                 {% endfor %}
             {% else %}
                 <p class="card-text">
@@ -57,10 +75,10 @@
         <div class="card-footer">
             <form action="{% url 'posts:create_comment' post.id %}" method="POST">
                 {% csrf_token %}
-            {% bootstrap_form comment_form %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary">댓글 달기</button>
-            {% endbuttons %}
+                {% bootstrap_form comment_form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">댓글 달기</button>
+                {% endbuttons %}
             </form>
         </div>
     </div>

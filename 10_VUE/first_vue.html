@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="app1"> <!-- 앞으로 쓸 최상위 div, like {% block body %} -->
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Reverse</button>
+    <p>{{ count }}</p>
+    <button v-on:click="plus">Up</button>
+    <button v-on:click="minus">Down</button>
+</div>
+<div id="app2">
+    <ol>
+        <li v-for="todo in todos">
+            {{ todo.content }}
+        </li>
+    </ol>
+</div>
+<div id="app3">
+    <span v-bind:data-info="message">
+        OHO
+    </span>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app1 = new Vue({
+        el: "#app1",
+        // app init state - MUST object, key는 무조건 object
+        data: {
+            message: "VUE JS VIEW JS",
+            count: 0,
+        },
+
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split("").reverse().join("");
+            },
+
+            plus: function () {
+                this.count++;
+            },
+
+            minus: function () {
+                this.count--;
+            }
+        }
+    });
+    const app2 = new Vue({
+        el: "#app2",
+        data: {
+            todos: [
+                {content: "JS"},
+                {content: "VUE"},
+                {content: "ZZANG"},
+            ],
+        },
+    });
+    const app3 = new Vue({
+        // el:
+    });
+    app1.plus()
+</script>
+</body>
+</html>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRe
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import JsonResponse, HttpResponseBadRequest
 from .models import Post, Image, HashTag
 from .forms import PostModelForm, ImageModelForm, CommentModelForm
 
@@ -106,14 +107,20 @@ def create_comment(request, post_id):
 @login_required
 @require_POST
 def toggle_like(request, post_id):
-    user = request.user
-    post = get_object_or_404(Post, id=post_id)
-    # if post.like_users.filter(id=user.id).exist(): # 좋아요 한 사람이 있으면 값이 나오고 없으면 빈 리스트 # exist는 좀 더 명확하게 만드는 역할
-    if user in post.like_users.all():
-        post.like_users.remove(user)
+    if request.is_ajax():
+        user = request.user
+        post = get_object_or_404(Post, id=post_id)
+        # if post.like_users.filter(id=user.id).exist(): # 좋아요 한 사람이 있으면 값이 나오고 없으면 빈 리스트 # exist는 좀 더 명확하게 만드는 역할
+        is_active = True
+        if user in post.like_users.all():
+            post.like_users.remove(user)
+            is_active = False
+        else:
+            post.like_users.add(user)
+        # return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/insta/"))
+        return JsonResponse({"likeCount": post.like_users.count(), "is_active": is_active})
     else:
-        post.like_users.add(user)
-    return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/insta/"))
+        return HttpResponseBadRequest()
 
 
 @require_GET

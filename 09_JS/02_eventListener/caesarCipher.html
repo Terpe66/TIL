@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <label for="user-output">origin</label>
+    <input autofocus type="text" id="user-input">
+</div>
+<div>
+    <label for="user-n">n</label>
+    <input type="text" id="user-n">
+</div>
+<h1 id="user-output"></h1>
+<script>
+    const inputArea = document.querySelector("#user-input");
+    const resultArea = document.querySelector("#user-output");
+    const push = document.querySelector("#user-n");
+    // inputArea.addEventListener("input", e => {
+    //     const n = Number(push.value);
+    //     const charArray = inputArea.value.split("");
+    //     const resultString = charArray.map(char => {
+    //         let charNumber = char.charCodeAt();
+    //         charNumber += n;
+    //         return String.fromCharCode(charNumber);
+    //     }).join("");
+    //     resultArea.innerHTML = resultString;
+    // });
+    const resultString = charArray.map(char => String.fromCharCode(char.charCodeAt() + n));
+
+    inputArea.addEventListener("input", e => {
+        let newValue = "";
+        for (const value of inputArea.value) {
+            newValue += String.fromCharCode(value.charCodeAt() + Number(push.value));
+        }
+        resultArea.innerHTML = newValue;
+    });
+    // String.fromCharCode("a".charCodeAt() + 1);
+</script>
+</body>
+</html>
