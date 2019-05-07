@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <h2 v-if="eng">Hi</h2>
+    <h2 v-show="kor">안녕</h2>
+<!--    v-if는 html에 넣느냐 마느냐를 결정하는 것-->
+<!--    show는 html은 들어가는데 display를 보여주냐 마느냐를 결정하는 것-->
+
+
+
+    {{ message }}
+    {{ status ? "Good" : "Bad" }}
+    {{ message | capitalize }}
+<!--    template 태그는 v-if랑 쓴다-->
+    <template v-if="status">
+        <h1>Good</h1>
+        <p>
+            JS
+        </p>
+    </template>
+    <p v-if="type === 'A'">A</p>
+    <p v-else-if="type === 'B'">B</p>
+    <p v-else-if="type === 'C'">C</p>
+    <p v-else>JS</p>
+</div>
+
+<script src="./vue.js"></script>
+<script>
+    new Vue ({
+        el: "#app",
+        data: {
+            message: "ssafy",
+            type: "JS",
+            status: false,
+            eng: true,
+            kor: true
+        },
+        methods: {},
+        filters: { // filters도 함수
+            capitalize (value) {
+                if (!value) return "";
+                value = value.toString();
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
+        }
+    })
+</script>
+</body>
+</html>

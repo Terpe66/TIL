@@ -10,12 +10,13 @@ const numberEach = (numbers, callback) => {
 console.log(numberEach([1, 2, 3, 4, 5], (number, sum=0) => sum += number ));
 console.log(numberEach([1, 2, 3, 4], (number, acc=1) => acc *= number));
 
-const muler = (number, sum=1) => {
-    return sum * number
+const muler = (number, mul=1) => {
+    return mul *= number
 };
+console.log(numberEach([1, 2, 3, 4], muler));
 
 const adder = (number, sum=0) => {
-    return sum + number
+    return sum += number
 };
 
 my_array = [1, 2, 3, 4, 5];

@@ -14,6 +14,21 @@
     <script>
         // ES5 (예전 표준)에서 표준은 var number = 1;이라고 저장했다
 
+        /*
+            var와 let의 차이
+            var number = 1;
+            for (var i = 0; i < 10; i++) {
+
+            }
+            console.log(i); 이러면 i는 10으로 출력된다.
+            =====
+            var number = 1;
+            for (let i = 0; i < 10; i++) {
+                let은 {} 단위 스코프를 가진다.
+            }
+            console.log(i); 이러면 i는 정의되지 않았기 때문에 참조할 수 없다는 에러 메시지가 출력된다.
+         */
+
         // ES6+에서는 아래처럼 저장한다
         let number = 1;
         let string = "JS";
