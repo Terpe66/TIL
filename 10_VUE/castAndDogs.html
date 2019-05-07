@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+<audio id="dogSound" ref="sound">
+    <source src="./bark.mp3" type="audio/mp3">
+</audio>
+<div class="container" id="app">
+    <button v-on:click="getDogImage(); playSound('./bark.mp3');">멍 - {{ dogCount }}</button>
+    <button v-on:click="getCatImage()">냥 - {{ catCount }}</button>
+    <br>
+    <div class="card-columns">
+        <div class="card" v-for="image in images">
+            <img class="card-img-top" v-bind:src="image" width="400px" alt="cat-or-dog">
+
+        </div>
+    </div>
+</div>
+
+<script src="./vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            images: [],
+            dogCount: 0,
+            catCount: 0,
+        },
+        methods: {
+            getDogImage() {
+                const URL = "https://dog.ceo/api/breeds/image/random";
+                axios.get(URL)
+                    .then(response => this.images.push(response.data.message))
+                    .then(() => this.dogCount++)
+                    .catch(error => {
+                        console.error(error);
+                        alert("Error!")
+                    })
+            },
+            // getCatImage() {
+            //     const URL = "https:api.thecatapi.com/v1/images/search";
+            //     axios.get(URL)
+            //         .then(response => this.images.push(response.data[0].url))
+            //         .then(() => this.catCount++);
+            // },
+            // async getDogImage() {
+            //     const URL = "https://dog.ceo/api/breeds/image/random";
+            //     const response = await axios.get(URL);
+            //     this.images.push(response.data.message);
+            //     this.dogCount++;
+            // },
+            async getCatImage() {
+                try {
+                    const URL = "https:api.thecatapi.com/v1/images/search";
+                    const response = await axios.get(URL)
+                    this.images.push(response.data[0].url);
+                    this.catCount++;
+                } catch (error) {
+                    console.error(error);
+                }
+            },
+            playSound (src) {
+                if (src) {
+                    const audio = new Audio(src);
+                    audio.play()
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

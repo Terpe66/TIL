@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .safe-spot {
+            color: white;
+            background-color: plum;
+            height: 10rem;
+            padding: 2rem;
+        }
+        .dead-spot {
+            color: white;
+            background-color: darkred;
+            height: 4rem;
+            padding: 2rem;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <!-- v-on:click에서 괄호를 안 달아도 e는 무조건 잡히게 되어 있다 -->
+    <button v-on:click="counter++">Up</button>
+    <button v-on:click="down($event, 3)">Down</button>
+    <p>{{ counter * 2 > 10 ? "n > 10" : "n < 10" }}</p>
+
+    <ul>
+        <li v-for="number in numbers.map(num => num * 2)">
+            {{ number * 5 }}
+        </li>
+    </ul>
+
+    <div>
+        <input type="text" v-on:keyup.enter="alertMe">
+    </div>
+
+    <table>
+        <tr>
+            <th>X coord</th>
+            <th>Y coord</th>
+        </tr>
+        <tr>
+            <td>{{ x }}</td>
+            <td>{{ y }}</td>
+        </tr>
+    </table>
+    <div class="safe-spot" v-on:mousemove="getMouseCoord">
+        Safe Zone
+        <div class="dead-spot" v-on:mouseover="stop">
+            DANGER!
+        </div>
+    </div>
+</div>
+
+<script src="./vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            counter: 0,
+            x: 0,
+            y: 0,
+            numbers: [1, 2, 3, 4, 5],
+        },
+        methods: {
+            up (e) {
+                this.counter += e.clientX;
+            },
+            down (e, n) {
+                this.counter -= n * e.clientY;
+            },
+            getMouseCoord (e) {
+                this.x = e.clientX; // 사용자 마우스의 X좌표
+                this.y = e.clientY; // 사용자 마우스의 Y좌표
+            },
+            stop () {
+                alert("YOU DIED");
+            },
+            alertMe(e) {
+                alert("Hey!");
+            }
+        }
+    })
+</script>
+</body>
+</html>

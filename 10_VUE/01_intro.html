@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>01_basic</title>
+</head>
+<body>
+<div id="app">
+    <label for="msg"></label>
+    <input type="text" id="msg" v-on:input="changeMsg($event, '???: ')"> <!-- oninput은 바닐라 JS에서 사용하는 것 -->
+    <!-- v-on:input="" 안에 changeMsg가 아니라 changeMsg라고 쓰려면, changeMsg($event) -->
+    <p>{{ msg }}</p>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app", // Vuw instance <=> HTML elem Binding, el은 예약어
+        data: { // 이 script가 실행되는 최초의 data initializing, data는 예약어
+            msg: "On Your Left",
+        },
+        methods: { // 이 script가 실행되는 최초의 function initializing, 함수 집합
+            greet: function () {
+                return this.msg;
+            },
+            changeMsg:  function (e, word) {
+                this.msg = word;
+                this.msg += e.target.value;
+            }
+        }
+    })
+</script>
+</body>
+</html>
