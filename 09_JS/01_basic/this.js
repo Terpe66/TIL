@@ -31,8 +31,8 @@ const you = {
     }
 };
 
-console.log(me.intro());
-console.log(you.intro());
+// console.log(me.intro());
+// console.log(you.intro());
 console.log(you.wait());
 
 // javascript의 객체는 {}, key랑 value로 이루어져 있다.
