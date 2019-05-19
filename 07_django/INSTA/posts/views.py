@@ -10,13 +10,17 @@ from .forms import PostModelForm, ImageModelForm, CommentModelForm
 @login_required
 @require_http_methods(["GET", "POST"])
 def create_post(request):
+    posts = Post.objects.all()
     if request.method == "POST":
         post_form = PostModelForm(request.POST)
         if post_form.is_valid():
             post = post_form.save(commit=False) # save를 하면 나오는 값을 post에 담아둠
             # commit=False를 쓰면 가짜 save, 저장은 하는데 넘기진 않음
             post.user = request.user
-            post.save()
+            if post not in posts:
+                post.save()
+            else:
+                print("있어")
 
             # create hashtag => <input name="tags" /> #hi #ssafy #20층
             content = post_form.cleaned_data.get("content") #
@@ -35,6 +39,7 @@ def create_post(request):
                 image_form = ImageModelForm(files=request.FILES)
                 if image_form.is_valid():
                     image = image_form.save(commit=False)
+
                     image.post = post
                     image.save()
             return redirect("posts:post_list")

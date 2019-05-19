@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <!--    v-model은 위와 아래가 완전 동기화 -->
+    <select v-model="status">
+        <option value="all" selected>모두 보기</option>
+        <option value="active">해야 할 일</option>
+        <option value="completed">한 일</option>
+    </select>
+
+    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo()">
+    <button v-on:click="addTodo()">추가하기</button>
+    <button @click="clearCompleted(todos)">Clear Completed</button>
+    <ol v-if="todos.length">
+        <li
+                v-for="todo in groupTodosByStatus"
+                :class="todo.completed ? 'completed' : ''"
+                :key="todo.id">
+            <input type="checkbox" v-model="todo.completed" @change="updateTodo(todo)">
+            <span>{{ todo.content }}</span>
+        </li>
+    </ol>
+</div>
+
+<script src="./vue.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+<script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+<script>
+    const config = {
+        apiKey: "AIzaSyCMxbf_cye2lryrC-w8uxBAL9hZop38fIc",
+        databaseURL: "https://todo-vue-j102s.firebaseio.com",
+        projectId: "todo-vue-j102s",
+    };
+    firebase.initializeApp(config);
+
+    const database = firebase.database();
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            newTodo: "",
+            status: "all",
+        },
+        firebase: {
+            todos: database.ref("todos"),
+        },
+        methods: {
+            check: function (todo = {}) {
+                todo.completed = !todo.completed;
+            },
+            addTodo() {
+                if (this.newTodo) {
+                    this.$firebaseRefs.todos.push({
+                        id: Date.now(),
+                        content: this.newTodo,
+                        completed: false
+                    });
+                    this.newTodo = "";
+                }
+            },
+            clearCompleted() {
+                // this.todos = this.todos.filter(todo => !todo.completed)
+                const completedTodos = this.todos.filter(todo => todo.completed);
+                completedTodos.forEach(todo => {
+                    this.$firebaseRefs.todos.child(todo[".key"]).remove()
+                });
+            },
+            updateTodo(todo) {
+                const newTodo = {...todo}; // Deepcopy
+                delete newTodo[".key"]; //
+                this.$firebaseRefs.todos.child(todo[".key"]).set(newTodo) // child는 배열에 원래 있는 함수가 아님
+            }
+        },
+        computed: {
+            groupTodosByStatus() {
+                if (this.status === "active") {
+                    return this.todos.filter(todo => !todo.completed)
+                } else if (this.status === "completed") {
+                    return this.todos.filter(todo => todo.completed)
+                } else {
+                    return this.todos;
+                }
+            }
+        },
+        // watch: {
+        //     todos: {
+        //         deep: true,
+        //         handler: function (value) {
+        //
+        //         }
+        //     }
+        // }
+    })
+</script>
+</body>
+</html>

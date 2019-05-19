@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="app">
-<!--    v-model은 위와 아래가 완전 동기화 -->
+    <!--    v-model은 위와 아래가 완전 동기화 -->
     <select v-model="status">
         <option value="all" selected>모두 보기</option>
         <option value="active">해야 할 일</option>
@@ -23,11 +23,12 @@
     <button v-on:click="addTodo()">추가하기</button>
     <button @click="clearCompleted(todos)">Clear Completed</button>
     <ol v-if="todos.length">
-<!--        <li v-for="todo in todos" :class="{completed : todo.completed}"> 밑이랑 같은 뜻 -->
+        <!--        <li v-for="todo in todos" :class="{completed : todo.completed}"> 밑이랑 같은 뜻 -->
         <li
-            v-for="todo in groupTodosByStatus()"
-            :class="todo.completed ? 'completed' : ''"
-            :key="todo.id"> <!-- key는 for문 돌릴 때 반드시 구분되어지게 해줘야 한다 virtual DOM이 가장 빠르게 구분할 수 있는 key라서 (지금은 우리가 일일이 넣어주니까?) -->
+                v-for="todo in groupTodosByStatus"
+                :class="todo.completed ? 'completed' : ''"
+                :key="todo.id">
+            <!-- key는 for문 돌릴 때 반드시 구분되어지게 해줘야 한다 virtual DOM이 가장 빠르게 구분할 수 있는 key라서 (지금은 우리가 일일이 넣어주니까?) -->
             <input type="checkbox" v-model="todo.completed">
             <span>{{ todo.content }}</span>
         </li>
@@ -36,41 +37,54 @@
 
 <script src="./vue.js"></script>
 <script>
+    // const STORAGE_KEY = "my-todos";
+    const todosApp = {
+        storageKey: "my-todos",
+        fetch: function () {
+            return JSON.parse(localStorage.getItem(this.storageKey)) || []
+            // return localStorage.getItem(this.storageKey)
+        },
+        save(todos) {
+            localStorage.setItem(this.storageKey, JSON.stringify(todos))
+        }
+    };
+    todosApp.fetch()
+
     const app = new Vue({
         el: "#app",
         data: {
-            todos: [
-                {
-                    id: 1,
-                    content: "저녁 메뉴 고민",
-                    completed: true
-                },
-                {
-                    id: 2,
-                    content: "시험 공부하기",
-                    completed: false
-                },
-                {
-                    id: 3,
-                    content: "집 살 걱정하기",
-                    completed: false
-                },
-                {
-                    id: 4,
-                    content: "행복하기",
-                    completed: false
-                },
-            ],
+            todos: todosApp.fetch(), // || [], // || 왼쪽의 값이 false면 오른쪽의 값을 불러온다
+            // [
+            // {
+            //     id: 1,
+            //     content: "저녁 메뉴 고민",
+            //     completed: true
+            // },
+            // {
+            //     id: 2,
+            //     content: "시험 공부하기",
+            //     completed: false
+            // },
+            // {
+            //     id: 3,
+            //     content: "집 살 걱정하기",
+            //     completed: false
+            // },
+            // {
+            //     id: 4,
+            //     content: "행복하기",
+            //     completed: false
+            // },
+            // ],
             newTodo: "",
             status: "all",
-            // groupTodosByStatus: [1, 2, 3, 4]
         },
-        methods: {
-            check: function (todo={}) {
+        methods: { // 행동 자체가 목적일 땐 methods
+            check: function (todo = {}) {
                 // true면 false, false,면 true
                 todo.completed = !todo.completed;
             },
-            addTodo () {
+            addTodo() {
                 // if (this.newTodo !== false) {
                 if (this.newTodo) {
                     this.todos.push({
@@ -82,13 +96,13 @@
                     this.newTodo = "";
                 }
             },
-            clearCompleted (todos={}) {
+            clearCompleted(todos = {}) {
                 this.todos = todos.filter(todo => {
                     return !todo.completed;
                     // return todo.completed === false;
-                /*
-                    this.todos = this.todos.filter(todo => !todo.completed)
-                 */
+                    /*
+                        this.todos = this.todos.filter(todo => !todo.completed)
+                     */
                 });
             },
             // groupTodosByStatus () {
@@ -101,14 +115,24 @@
             //     }
             // }
         },
-        computed: { // methods에서 해도 되는 거 왜 여기서 하냐!
-            groupTodosByStatus () {
+        computed: { // methods에서 해도 되는 거 왜 여기서 하냐!, 어떤 값을 받아보거나 할 경우(return이 필요할 경우)엔 computed or watch
+            groupTodosByStatus() {
                 if (this.status === "active") {
                     return this.todos.filter(todo => !todo.completed)
                 } else if (this.status === "completed") {
                     return this.todos.filter(todo => todo.completed)
                 } else {
                     return this.todos;
+                }
+            }
+        },
+        watch: {
+            // newTodo: function() {
+            // watch는 data를 정확하게 입력해주어야 한다.
+            todos: { // todosApp.save(this.todos)
+                deep: true, // 배열 안에 있는 요소를 다 보겠다는 의미
+                handler: function (value) { // deep을 썼을 때, 함수를 호출하려면 handler를 사용해야 한다
+                    todosApp.save(value)
                 }
             }
         }

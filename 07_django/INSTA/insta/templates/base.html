@@ -47,9 +47,9 @@
             axios.defaults.xsrfHeaderName = "X-CSRFToken";
             // 이 request는 XHR 방식으로 보내는 것입니다.
             axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
-            console.log(axios.defaults);
             axios.post(URL, {})
                 .then(response => {
+                    console.log(response)
                     const likeCountArea = document.querySelector(`#like-count-${postId}`);
                     likeCountArea.innerHTML = response.data.likeCount;
 

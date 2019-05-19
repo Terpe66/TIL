@@ -14,5 +14,5 @@ class CustomUserAuthenticationForm(AuthenticationForm):
         model = User
 
 
-class CustomUserAuthenticationForm(AuthenticationForm):
+class CustomUserChaneForm(UserChangeForm):
     pass

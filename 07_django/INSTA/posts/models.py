@@ -21,7 +21,7 @@ class HashTag(models.Model):
 
 class Post(TimeStampedModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.CharField(max_length=140)
+    content = models.CharField(max_length=140, unique=True)
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_posts")
     tags = models.ManyToManyField(HashTag, blank=True, related_name="posts")
     # image = models.ImageField(blank=True) # pip install pillow
