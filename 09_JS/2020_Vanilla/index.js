@@ -1,0 +1,1 @@
+alert("Vanilla JS");
