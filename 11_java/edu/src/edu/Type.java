@@ -17,6 +17,15 @@ public class Type {
 		System.out.println(point);
 		System.out.println(price);
 		System.out.println(totalSales);
+		
+		
+		float exchangeRate = 1136.50f;
+		double USDAmount = 600.50;
+		double KRWAmount = 282468.25;
+		
+		System.out.println(exchangeRate);
+		System.out.println(USDAmount);
+		System.out.println(KRWAmount);
 	}
 
 }
