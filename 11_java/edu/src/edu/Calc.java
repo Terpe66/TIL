@@ -7,6 +7,14 @@ public class Calc {
 		int A3 = A1 + A2;
 		
 		System.out.println(A3);
+		
+		int a = 7, b = 3;
+		
+		System.out.println(a + b);
+		System.out.println(a - b);
+		System.out.println(a * b);
+		System.out.println(a / b);
+		System.out.println(a % b);
 	}
 
 }
