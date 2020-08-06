@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"edu","c":"Annotation","l":"Annotation()","url":"%3Cinit%3E()"},{"p":"edu","c":"Annotation","l":"sum(int, int)","url":"sum(int,int)"}]
