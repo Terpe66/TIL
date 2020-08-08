@@ -8,7 +8,7 @@ public class For {
 		int i = 0;
 		for (int j = 0; j < testArr.length; ++j)
 		{
-			testArr[++i][0] = i;
+			testArr[i][0] = ++i;
 			testArr[j][1] = j;
 		}
 		
