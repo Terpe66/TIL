@@ -1,6 +1,6 @@
 package edu;
 
-public class For {
+public class ForTest {
 
 	public static void main(String[] args) {
 		int[][] testArr = new int[5][2];
