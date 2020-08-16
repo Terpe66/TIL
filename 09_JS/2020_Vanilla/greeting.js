@@ -8,11 +8,11 @@ function checkSubmit(event)
 {
   event.preventDefault();
   const inputName = input.value;
-  saveName();
+  saveName(inputName);
   paintGreeting(inputName);
 }
 
-function saveName()
+function saveName(inputName)
 {
   localStorage.setItem("username", inputName);
 }
