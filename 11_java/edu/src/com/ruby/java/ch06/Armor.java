@@ -4,7 +4,7 @@ public class Armor {
 	private String name;
 	private int height;	
 	
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 	
