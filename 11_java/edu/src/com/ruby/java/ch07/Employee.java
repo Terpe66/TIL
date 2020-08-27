@@ -14,4 +14,8 @@ public class Employee extends Person {
 	public String toString() {
 		return this.getName() + ":" + this.getAge() + ":" + this.dept;
 	}
+	
+//	public String toString() {
+//		return name + ":" + age + ":" + dept;
+//	}
 }
