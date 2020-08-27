@@ -14,4 +14,8 @@ public class Professor extends Person {
 	public String toString() {
 		return this.getName() + ":" + this.getAge() + ":" + this.subject;
 	}
+	
+//	public String toString() {
+//		return name + ":" + age + ":" + subject;
+//	}
 }
