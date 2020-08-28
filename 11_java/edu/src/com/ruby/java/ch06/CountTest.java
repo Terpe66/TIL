@@ -8,7 +8,7 @@ class Count {
 public class CountTest {	
 	public static void main(String[] args) {
 		System.out.println("실행 시작");;
-		Count cnt = new Count();
+//		Count cnt = new Count();
 	}
 
 }
