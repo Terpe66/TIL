@@ -4,8 +4,9 @@ public class Person {
 	private String name;
 	private int age;
 	
-//	protected String name;
-//	protected int age;
+	public Person() {
+		System.out.println(1);
+	}
 	
 	public String getName() {
 		return name;
