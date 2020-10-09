@@ -3,6 +3,11 @@ package com.ruby.java.ch07;
 public class Professor extends Person {
 	private String subject;
 	
+	public Professor() {
+		super();
+		System.out.println(2);
+	}
+	
 	public String getSubject() {
 		return subject;
 	}
@@ -12,10 +17,6 @@ public class Professor extends Person {
 	}
 	
 	public String toString() {
-		return this.getName() + ":" + this.getAge() + ":" + this.subject;
+		return super.toString() + ":" + subject;
 	}
-	
-//	public String toString() {
-//		return name + ":" + age + ":" + subject;
-//	}
 }
