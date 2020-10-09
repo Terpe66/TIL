@@ -3,6 +3,11 @@ package com.ruby.java.ch07;
 public class Employee extends Person {
 	private String dept;
 	
+	public Employee() {
+		super();
+		System.out.println(2);
+	}
+	
 	public String getDept() {
 		return dept;
 	}
@@ -12,10 +17,6 @@ public class Employee extends Person {
 	}
 	
 	public String toString() {
-		return this.getName() + ":" + this.getAge() + ":" + this.dept;
+		return super.toString() + ":" + dept;
 	}
-	
-//	public String toString() {
-//		return name + ":" + age + ":" + dept;
-//	}
 }
